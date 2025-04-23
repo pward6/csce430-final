@@ -1,8 +1,3 @@
-==7239== Lackey, an example Valgrind tool
-==7239== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote.
-==7239== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==7239== Command: ./qsort_small
-==7239== 
 I  00401b30,4
 I  00401b34,2
 I  00401b36,3
@@ -49304,22 +49299,3 @@ I  0044f3c0,5
 I  0044f3c5,2
 I  0044f3dd,2
 I  0044f3df,2
-==7239== 
-==7239== Counted 1 call to main()
-==7239== 
-==7239== Jccs:
-==7239==   total:         9,861
-==7239==   taken:         4,962 (50%)
-==7239== 
-==7239== Executed:
-==7239==   SBs entered:   8,488
-==7239==   SBs completed: 5,352
-==7239==   guest instrs:  40,188
-==7239==   IRStmts:       271,425
-==7239== 
-==7239== Ratios:
-==7239==   guest instrs : SB entered  = 47 : 10
-==7239==        IRStmts : SB entered  = 319 : 10
-==7239==        IRStmts : guest instr = 67 : 10
-==7239== 
-==7239== Exit code:       0
