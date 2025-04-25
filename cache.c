@@ -2,12 +2,12 @@
 #include <string.h>
 #include "cache.h"
 
-static uint32_t get_index(uint32_t address){
+static uint32_t get_index(uint64_t address){
     // 32 bit address is shifted 4 bits to cut off offset bits and then ANDed with 1000000 - 1 which is 0111111
     return (address >> OFFSET_BITS) & ((1 << INDEX_BITS) - 1);
 }
 
-static uint32_t get_tag(uint32_t address){
+static uint32_t get_tag(uint64_t address){
     return (address >> OFFSET_BITS) >> INDEX_BITS;
 }
 
@@ -21,7 +21,7 @@ void free_cache(Cache* cache){
     free(cache);
 }
 
-int cache_get(Cache* cache, uint32_t address){
+int cache_get(Cache* cache, uint64_t address){
     uint32_t tag = get_tag(address);
     uint32_t index = get_index(address);
 
@@ -46,7 +46,7 @@ int cache_get(Cache* cache, uint32_t address){
     return 0; // miss
 }
 
-void cache_put(Cache* cache, uint32_t address){
+void cache_put(Cache* cache, uint64_t address){
     uint32_t tag = get_tag(address);
     uint32_t index = get_index(address);
 

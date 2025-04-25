@@ -5,12 +5,12 @@
 #include "cache.h"
 
 #define FILENAME "traces/qsort_memtrace.txt"
-#define ADDRESS_LENGTH 8
+#define ADDRESS_LENGTH 10
 #define CACHE_HIT 2
 #define VICTIM_CACHE_HIT 1
 #define CACHE_MISS 0
 
-int run_instruction(Cache *cache, char* instruction, uint32_t address){
+int run_instruction(Cache *cache, char* instruction, uint64_t address){
     int output;
     if (strcmp("L", instruction) == 0){
         output = cache_get(cache, address);
@@ -60,22 +60,10 @@ int main(){
 
         address_string[strcspn(address_string, "\r\n")] = 0; // trim any unneccesary return characters added by windows
         
-        // check if address is too long
-        /**
-         * This happens occasionally in the trace whree 40 bit addresses are given.
-         * I'm not sure why this happens, but for the purpose of the simulation,
-         * we can just ignore them.
-         */
         char *endptr;
-        unsigned long addr = strtoul(address_string, &endptr, 16);
+        unsigned long addr = strtoull(address_string, &endptr, 16);
         
-        if (addr > 0xFFFFFFFF) {
-            fprintf(stderr, "Skipping oversized address: %s\n", address_string);
-            free(line_copy);
-            continue; 
-        }
-        
-        uint32_t address = (uint32_t) addr;
+        uint64_t address = (uint64_t) addr;
         
         output = run_instruction(cache, instruction, address);
         total_ops++;
@@ -85,6 +73,8 @@ int main(){
             victim_cache_hits++;
         } else if (output == CACHE_MISS){
             misses++;
+        }else{
+            total_ops--; // don't count instruction loading instructions
         }
         
         free(line_copy); // Free our duplicate

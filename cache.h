@@ -36,7 +36,7 @@ typedef struct {
 // Functions
 Cache* create_cache();
 void free_cache(Cache* cache);
-int cache_get(Cache* cache, uint32_t address);
-void cache_put(Cache* cache, uint32_t address);
+int cache_get(Cache* cache, uint64_t address);
+void cache_put(Cache* cache, uint64_t address);
 
 #endif
