@@ -22,14 +22,14 @@ void free_cache(Cache* cache){
 }
 
 int cache_get(Cache* cache, uint32_t address){
-    uint32_t tag = get_tag(cache);
-    uint32_t index = get_index(cache);
+    uint32_t tag = get_tag(address);
+    uint32_t index = get_index(address);
 
     CacheBlock *main_line = &cache->main.blocks[index];
 
     // check main cache
     if (main_line->valid && main_line->tag == tag) {
-        return 1; // hit
+        return 2; // hit
     }
 
     // check victim cache
@@ -47,8 +47,8 @@ int cache_get(Cache* cache, uint32_t address){
 }
 
 void cache_put(Cache* cache, uint32_t address){
-    uint32_t tag = get_tag(cache);
-    uint32_t index = get_index(cache);
+    uint32_t tag = get_tag(address);
+    uint32_t index = get_index(address);
 
     CacheBlock *main_line = &cache->main.blocks[index];
     if (main_line->valid){
