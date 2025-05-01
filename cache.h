@@ -12,7 +12,7 @@
 #define INDEX_BITS 8                         // log2(256)
 #define TAG_BITS (ADDRESS_BITS - OFFSET_BITS - INDEX_BITS)
 
-#define VICTIM_CACHE_SIZE 8
+#define VICTIM_CACHE_SIZE 4096
 
 typedef struct {
     uint32_t tag;

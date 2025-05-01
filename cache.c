@@ -43,6 +43,7 @@ int cache_get(Cache* cache, uint64_t address){
         }
     }
 
+    cache_put(cache, address);
     return 0; // miss
 }
 
